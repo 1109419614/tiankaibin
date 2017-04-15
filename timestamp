@@ -1,0 +1,29 @@
+import time
+import copy
+timeStamp=int(time.time())
+timeArray = time.localtime(timeStamp)
+otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+
+class VariableTable(object):
+    def __init__(self):
+        self.value = {}
+        self.gettime = {}
+        self.senttime = {}
+
+    def timeget(self)
+        for key,value in self.value:
+        self.gettime[key]=otherStyleTime
+
+    def update(self, name, value):
+        # type: (str, object) -> None
+        self.value[name] = value
+
+    def extract(self):
+        # type: () -> dict
+
+        for key,value in self.value:
+        self.senttime[key]=otherStyleTime
+        
+        return self.value.copy()
+
+table = VariableTable()
