@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
+{% block head_title %}
+<title>首页</title>
+{% endblock %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <article class="main clearfix">
+        <article class="main-center">
+            <div class="main-inner">
+                {% block center_content %}
+                {% endblock %}
+            </div>
+        </article>
+        <aside class="main-left">
+            <ul class="list-unstyled list-menu">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <li><a href="#">我的赞</a></li>
+            </ul>
+            <div class="hr"></div>
+            <ul class="list-unstyled list-menu">
+                <li><a href="#"><i class="glyphicon glyphicon-fire"></i>热门微博</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-facetime-video"></i>热门视频</a></li>
+            </ul>
+            <div class="hr"></div>
+            <ul class="list-unstyled list-menu">
+                <li><a href="#">好友圈<i class="glyphicon glyphicon-bell pull-right"></i></a></li>
+                <li><a href="#">特别关注<i class="glyphicon glyphicon-bell pull-right"></i></a></li>
+            </ul>
+            <ul class="list-unstyled list-menu">
+                <li><a href="#">· 分组1</a></li>
+                <li><a href="#">· 分组2</a></li>
+                <li><a href="#">· 分组3</a></li>
+                <li><a href="#">· 分组4</a></li>
+                <li><a href="#">· 分组5</a></li>
+            </ul>
+        </aside>
+        <aside class="main-right">
+            <!-- 个人简介 -->
+            <div class="profile">
+                <div class="headimg">
+                    <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+                </div>
+                <div class="info">
+                    <strong>{{ current_user.nickname }}</strong>
+                    <span class="level">Lv.16</span>
+                </div>
+                <div class="tips">
+                    <ul class="list-unstyled list-inline">
+                        <li>
+                            <a href="#">
+                                <strong>168</strong>
+                                <span>关注</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <strong>168</strong>
+                                <span>粉丝</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <strong>168</strong>
+                                <span>微博</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- // 个人简介 -->
+            <!-- 热门话题 -->
+            <div class="hot-topic">
+                <div class="topic-header">
+                    <strong>热门话题</strong>
+                </div>
+                <div class="list-topic">
+                    <ul class="list-unstyled">
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                        <li><a href="#">#话题1# <span class="pull-right">120万</span></a></li>
+                    </ul>
+                </div>
+                <div class="topic-footer text-center">
+                    <a href="#">查看更多&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+            </div>
+            <!-- // 热门话题 -->
+        </aside>
+    </article>
+</div>
+{% endblock %}

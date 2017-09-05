@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>用户详情页</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile.css', _external=True) }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+	<h3>用户详情页</h3>
+	<p>
+		昵称：{{ current_user.nickname }}
+	</p>
+	<p>
+		{{ current_user.username }}
+	</p>
+</div>
+{% endblock %}

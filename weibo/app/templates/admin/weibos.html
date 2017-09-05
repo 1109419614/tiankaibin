@@ -1,0 +1,59 @@
+{% extends 'admin/admin_base.html' %}
+{% import 'moudule/paginator.html' as paginator %}
+{% block head_title %}
+<title>微博后台管理| 微博管理</title>
+{% endblock %}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li><a href="{{ url_for('admin_index') }}">后台首页</a></li>
+  <li class="active">微博管理</li>
+</ol>
+{% endblock %}
+{% block right_content %}
+<!-- 用户管理 -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>内容</th>
+      <th>用户</th>
+      <th>发送时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in page_data.items %}
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.get_content()|striptags|truncate(25, true) }}</td>
+      <td>{{ item.user.nickname }}</td>
+      <td>{{ item.created_at }}</td>
+      <td><a class="btn btn-info" data-url="{{ url_for('admin_weibo_manage', pk=item.id) }}" href="javascript:;" title="">删除</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<!-- // 用户管理 -->
+<!-- 分页 -->
+{{ paginator.pagination(page_data, 'admin_weibos') }}
+<!-- // 分页 -->
+{% endblock %}
+{% block extrajs %}
+<script>
+  $(function(){
+    $(".btn").on('click', function(){
+      var _self = $(this);
+      $.post(_self.attr('data-url'), function(rest){
+        if (rest === '201'){
+          _self.parents('tr').hide();
+          alert('操作成功');
+        }else if (rest === '401'){
+          alert('请先登录')
+        }else if(rest == '404'){
+          alert('微博已被删除')
+        }
+      })
+    })
+  })
+</script>
+{% endblock %}

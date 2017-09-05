@@ -1,0 +1,33 @@
+<ul class="list-unstyled">
+    <li>
+        <div class="imghead">
+            <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+        </div>
+        <form class="form-weibo-comment" method='post' action="{{ url_for('weibo_comment', pk=weibo.id)}}">
+            <div class="form-group">
+                {{ form.content }}
+                <ul class="text-danger">
+                    {% for err in form.content.errors %}
+                    <li>{{ err }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group clearfix">
+                {{ form.csrf_token }}
+                <input class="btn btn-info pull-right btn-submit" type="button" name="" value="评论">
+            </div>
+        </form>
+    </li>
+    {% for item in comment_list %}
+    <li>
+        <div class="imghead">
+            <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+        </div>
+        <h5>{{ item.user.nickname }}</h5>
+        <small>{{ item.created_at }}</small>
+        <p>
+            {{ item.content }}
+        </p>
+    </li>
+    {% endfor %}
+</ul>
