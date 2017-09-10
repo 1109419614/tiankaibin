@@ -1,0 +1,43 @@
+{% extends 'home/home_base.html' %}
+{% import 'moudule/paginator.html' as paginator %}
+{% block head_title %}
+<title>话题详情</title>
+{% endblock %}
+{% block center_content %}
+<h3>#{{ topic.name }}#</h3>
+<p>描述信息</p>
+<!-- 发布微博 -->
+{% include 'moudule/form_weibo.html' %}
+<!-- // 发布微博 -->
+<!-- 微博列表 -->
+<div class="list-weibo">
+{% for weibo_obj in page_data.items %}
+    <div class="item-weibo clearfix">
+        <div class="weibo-top">
+            <div class="weibo-left">
+                <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+            </div>
+            <div class="weibo-right">
+                <h6>{{ weibo_obj.user.nickname }}</h6>
+                <small class="text-muted">{{ weibo_obj.created_at }} 来自360浏览器</small>
+                <div class="weibo-content">
+                    {{ weibo_obj.get_content()|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="weibo-footer">
+            <ul class="list-inline list-unstyled clearfix">
+                <li><a href="#">收藏</a></li>
+                <li><a href="#">转发</a><span class="num">23</span</li>
+                <li><a href="#"><i class="glyphicon glyphicon-comment"></i></a><span class="num">23</span></li>
+                <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i></a><span class="num">23</span</li>
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<!-- // 微博列表 -->
+<!-- 分页 -->
+{{ paginator.pagination2(page_data, 'topic_detail',topic.name) }}
+<!-- // 分页 -->
+{% endblock %}
