@@ -9,7 +9,7 @@
 <div class="panel-user">
   <div class="user-content clearfix">
       <div class="headimg">
-        <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+        <img src="{{ url_for('static', filename=user.head_img) }}" alt="个人头像">
       </div>
       <div class="user-info">
         <h3>{{ user.nickname }}</h3>
@@ -52,7 +52,7 @@
     <div class="item-weibo clearfix">
         <div class="weibo-top">
             <div class="weibo-left">
-                <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+                <img src="{{ url_for('static', filename=user.head_img) }}" alt="个人头像">
             </div>
             <div class="weibo-right">
                 <h6>{{ weibo_obj.user.nickname }}</h6>
@@ -86,7 +86,7 @@
       $.post(_self.attr('data-url'), function(rest){
         if(rest == '201'){
           alert('关注成功');
-        }else if (rest='404'){
+        }else if (rest=='404'){
           alert('您已经关注该用户了')
         }else if(rest == '401'){
           alert('请先登录')

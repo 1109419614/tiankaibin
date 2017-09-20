@@ -8,12 +8,13 @@
 {% include 'moudule/form_weibo.html' %}
 <!-- // 发布微博 -->
 <!-- 微博列表 -->
+
 <div class="list-weibo">
     {% for weibo_obj in page_data.items %}
     <div class="item-weibo clearfix">
         <div class="weibo-top">
             <div class="weibo-left">
-                <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+                <img src="{{ url_for('static', filename = weibo_obj.user.head_img) }}" alt="个人头像">
             </div>
             <div class="weibo-right">
                 <h6>{{ weibo_obj.user.nickname }}</h6>
@@ -41,7 +42,10 @@
 <!-- 分页 -->
 {{ paginator.pagination(page_data, 'index') }}
 <!-- // 分页 -->
+
+
 {% endblock %}
+
 {% block extrajs %}
 <script type="text/javascript">
     $(function(){

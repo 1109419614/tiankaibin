@@ -53,3 +53,31 @@
 <!-- // 分页 -->
 {% endif %}
 {%- endmacro %}
+
+{% macro pagination3(page_data, url_name) -%}
+{% if page_data %}
+<!-- 分页 -->
+<nav >
+  <ul class="pagination">
+    {% if page_data.has_prev %}
+    <li><a href="{{ url_for(url_name,page=page_data.prev_num) }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="javscript:;">&raquo;</a></li>
+    {% endif %}
+    {% for page in page_data.iter_pages() %}
+    {% if page == page_data.page %}
+    <li class="active"><a href="javscript:;">{{ page }}</a></li>
+    {% else %}
+    <li><a href="{{ url_for(url_name,page=page) }}">{{ page}}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if page_data.has_next %}
+    <li><a href="{{ url_for(url_name,page=page_data.next_num ) }}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="javscript:;">&raquo;</a></li>
+    {% endif %}
+  </ul>
+</nav>
+<!-- // 分页 -->
+{% endif %}
+{%- endmacro %}

@@ -5,7 +5,10 @@
 <title>首页</title>
 {% endblock %}
 {% endblock %}
+
+
 {% block content %}
+{% if  current_user.is_authenticated %}
 <div class="container">
     <article class="main clearfix">
         <article class="main-center">
@@ -42,8 +45,9 @@
             <!-- 个人简介 -->
             <div class="profile">
                 <div class="headimg">
-                    <img src="{{ url_for('static', filename='img/headimg.jpg') }}" alt="个人头像">
+                    <a href={{ url_for('profile') }}><img src="{{ url_for('static', filename=current_user.head_img) }}" alt="个人头像" onclick="pro()"></a>>
                 </div>
+
                 <div class="info">
                     <strong>{{ current_user.nickname }}</strong>
                     <span class="level">Lv.16</span>
@@ -99,4 +103,14 @@
         </aside>
     </article>
 </div>
+{% else %}
+    <div style="float:left;margin:0px;">
+    <div class="div1">
+        <img style="background: repeat-x 0 0" src="{{ url_for('static',filename='img/9.jpg') }}"  alt="无注册" />
+    </div>
+</div>
+{% endif %}
 {% endblock %}
+
+
+

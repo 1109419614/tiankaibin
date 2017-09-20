@@ -31,10 +31,14 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 import re
+
 from datetime import datetime
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from flask_wtf.file import FileField,FileRequired,FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField,FileField
 from wtforms.validators import DataRequired, ValidationError
+
+
 
 from weibo import db
 from weibo.models import User, Weibo, WeiboRelTopic, WeiboAtUser, Topic, Comment
@@ -66,9 +70,13 @@ class RegistForm(FlaskForm):
         render_kw={"required": 'required', "placeholder": "请输入昵称"},
         description="输入用户昵称")
     password = PasswordField('密码', validators=[DataRequired("请输入密码")])
+    head_img = FileField(label="头像", validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
+
     submit = SubmitField('注册', render_kw={
             'class': 'btn btn-info'
         })
+
+
 
     def validate_password(self, field):
         password = field.data
@@ -98,20 +106,25 @@ class RegistForm(FlaskForm):
             raise ValidationError('昵称只能包含字母_-数字')
         return nickname
 
-    def regist(self):
-        """ 注册用户 """
-        data = self.data
-        user = User(
-            username=data['username'],
-            nickname=data['nickname'],
-            )
-        # 设置用户的密码
-        user.set_password(data['password'])
-        db.session.add(user)
-        db.session.commit()
+    # def regist(self):
+    #     """ 注册用户 """
+    #     data = self.data
+    #     f=data['head_img'].data
+    #     filename=secure_filename(f.filename)
+    #     addr=os.path.join(os.path.abspath(os.path.dirname(__file__)),filename)
+    #     f.save(addr)
+        # user = User(
+        #     username=data['username'],
+        #     nickname=data['nickname'],
+        #     # head_img=addr,
+        #     )
+        # # 设置用户的密码
+        # user.set_password(data['password'])
+        # db.session.add(user)
+        # db.session.commit()
         # 保存用户数据
         # 返回用户
-        return user
+        # return user
 
 
 class WeiboForm(FlaskForm):

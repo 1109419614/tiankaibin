@@ -7,12 +7,12 @@ view 层
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
-
+import os
 from datetime import datetime
 from flask import render_template, redirect, flash, url_for, request, abort
 from flask_login import login_required, login_user, logout_user,\
     UserMixin, current_user
-
+from werkzeug.utils import secure_filename
 
 from weibo.forms import LoginForm, RegistForm, WeiboForm, WeiboCommentForm
 from weibo import login_manager, db, app
@@ -94,7 +94,20 @@ def regist():
     """ 注册 """
     form = RegistForm()
     if form.validate_on_submit():
-        user = form.regist()
+        f = form.head_img.data
+        filename = secure_filename(f.filename)
+        addr = os.path.join("head_img", filename)
+        f.save(addr)
+        user = User(
+            username=form.data['username'],
+            nickname=form.data['nickname'],
+            head_img=addr,
+        )
+        # 设置用户的密码
+        user.set_password(form.data['password'])
+        db.session.add(user)
+        db.session.commit()
+        # user = form.regist()
         # 登录用户
         login_user(user)
         # 消息提示
@@ -108,7 +121,7 @@ def regist():
 @login_required
 def profile():
     """ 个人用户详细信息 """
-    print(current_user)
+    #print(current_user)
     return render_template('user/profile.html')
 
 
@@ -202,7 +215,7 @@ def user_friend(nickname):
 
 @app.route('/admin/')
 @login_required
-# @staff_perms_required
+@staff_perms_required
 def admin_index():
     """ 后台管理首页 """
     return render_template('admin/index.html',
@@ -212,7 +225,7 @@ def admin_index():
 @app.route('/admin/user/')
 @app.route('/admin/user/page/<int:page>/')
 @login_required
-@staff_perms_required
+#@staff_perms_required
 def admin_users(page=None):
     """ 用户管理 """
     if page is None:
