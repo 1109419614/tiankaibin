@@ -9,7 +9,7 @@
 <div class="panel-user">
   <div class="user-content clearfix">
       <div class="headimg">
-        <img src="{{ url_for('static', filename=user.head_img) }}" alt="个人头像">
+          <a href={{ url_for('profile',nickname=user.nickname) }}><img src="{{ url_for('static', filename=user.head_img) }}" alt="个人头像"></a>
       </div>
       <div class="user-info">
         <h3>{{ user.nickname }}</h3>
@@ -52,7 +52,7 @@
     <div class="item-weibo clearfix">
         <div class="weibo-top">
             <div class="weibo-left">
-                <img src="{{ url_for('static', filename=user.head_img) }}" alt="个人头像">
+                <a href={{ url_for('profile',nickname=user.nickname) }}><img src="{{ url_for('static', filename=user.head_img) }}" alt="个人头像"></a>
             </div>
             <div class="weibo-right">
                 <h6>{{ weibo_obj.user.nickname }}</h6>

@@ -99,21 +99,24 @@ class Weibo(db.Model):
 
     def get_content(self):
         """ 替换@和话题 """
-        content1 = self.content
+        content = self.content
+
+
 
         # 替换@,match_obj为 "@sb"
         def replace_at(match_obj):
             return '<a href="%s">%s</a>' % (
                 url_for('user_detail', nickname=match_obj.group(1)),
                 match_obj.group(0))
-        content2 = re.sub(constants.AT_USER_PATTEN, replace_at, content1)
+        content = re.sub(constants.AT_USER_PATTEN, replace_at, content)
         # 替换话题
-        print (content2+"\n")
         def replace_topic(match_obj):
             return '<a href="%s">%s</a>' % (
                 url_for('topic_detail', name=match_obj.group(1)),
                 match_obj.group(0))
-        content = re.sub(constants.TOPIC_PATTEN, replace_topic, content2)
+        content = re.sub(constants.TOPIC_PATTEN, replace_topic, content)
+
+
 
         return content
 
