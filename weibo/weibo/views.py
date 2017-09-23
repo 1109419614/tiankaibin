@@ -117,12 +117,13 @@ def regist():
     return render_template('user/regist.html', form=form)
 
 
-@app.route('/user/profile/')
+@app.route('/user/profile/<nickname>/')
 @login_required
-def profile():
+def profile(nickname):
     """ 个人用户详细信息 """
+    user = User.query.filter_by(nickname = nickname).first_or_404()
     #print(current_user)
-    return render_template('user/profile.html')
+    return render_template('user/profile.html',user=user)
 
 
 @app.route('/user/<nickname>/')
@@ -189,7 +190,7 @@ def weibo_comment(pk):
         comment_list=comment_list)
 
 
-@app.route('/user/friend/nickname/', methods=['GET', 'POST'])
+@app.route('/user/friend/<nickname>/', methods=['GET', 'POST'])
 def user_friend(nickname):
     """ 微博关注 """
     # 查找用户

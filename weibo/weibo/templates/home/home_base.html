@@ -19,7 +19,8 @@
         </article>
         <aside class="main-left">
             <ul class="list-unstyled list-menu">
-                <li><a href="#">首页</a></li>
+
+                <li><a  href="{{ url_for('index') }}">首页</a><li>
                 <li><a href="#">我的收藏</a></li>
                 <li><a href="#">我的赞</a></li>
             </ul>
@@ -45,7 +46,7 @@
             <!-- 个人简介 -->
             <div class="profile">
                 <div class="headimg">
-                    <a href={{ url_for('profile') }}><img src="{{ url_for('static', filename=current_user.head_img) }}" alt="个人头像" onclick="pro()"></a>>
+                    <a href={{ url_for('profile',nickname=current_user.nickname) }}><img src="{{ url_for('static', filename=current_user.head_img) }}" alt="个人头像" ></a>
                 </div>
 
                 <div class="info">
@@ -106,7 +107,7 @@
 {% else %}
     <div style="float:left;margin:0px;">
     <div class="div1">
-        <img style="background: repeat-x 0 0" src="{{ url_for('static',filename='img/9.jpg') }}"  alt="无注册" />
+        <img style="background: repeat-x 0 0" src="{{ url_for('static',filename='img/9.jpg') }}"  alt="无注册" width="2000" />
     </div>
 </div>
 {% endif %}

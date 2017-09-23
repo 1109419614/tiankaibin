@@ -19,6 +19,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="{{ url_for('index') }}">
+
           <span class="logo"></span>
         </a>
       </div>
@@ -53,7 +54,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="#">更改密码</a></li>
-              <li><a href="{{ url_for('profile') }}">个人信息</a></li>
+              <li><a href="{{ url_for('profile',nickname=current_user.nickname) }}">个人信息</a></li>
               <li class="divider"></li>
               <li><a href="#">退出登录</a></li>
             </ul>

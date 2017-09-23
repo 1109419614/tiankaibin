@@ -5,12 +5,25 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-	<h3>用户详情页</h3>
-	<p>
-		昵称：{{ current_user.nickname }}
-	</p>
-	<p>
-		{{ current_user.username }}
-	</p>
-</div>
+    <div class="panel panel-default">
+         <div class="panel-heading">头像</div>
+         <div class="panel-body">
+             <img src="{{ url_for('static', filename=user.head_img) }}" alt="个人头像" width="300">
+         </div>
+    </div>
+    <div class="panel panel-default">
+         <div class="panel-heading">昵称</div>
+         <div class="panel-body">
+             {{ user.nickname }}
+         </div>
+    </div>
+    <div class="panel panel-default">
+         <div class="panel-heading">username</div>
+         <div class="panel-body">
+             {{ user.username }}
+         </div>
+    </div>
+
+
+
 {% endblock %}
