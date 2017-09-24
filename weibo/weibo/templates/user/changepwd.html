@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>修改密码页</title>
+
+{% endblock %}
+{% block content %}
+<div class="container">
+  <form class="form-horizontal form-login" role="form" method="post">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">{{ form.oldpassword.label.text }}</label>
+      <div class="col-sm-3">
+        {{ form.oldpassword }}
+      </div>
+      <div class="col-sm-5">
+        <ul class="text-danger">
+        {% for err in form.oldpassword.errors %}
+          <li>{{ err }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">{{ form.newpassword.label.text }}</label>
+      <div class="col-sm-3">
+        {{ form.newpassword }}
+      </div>
+      <div class="col-sm-5">
+        <ul class="text-danger">
+        {% for err in form.newpassword.errors %}
+          <li>{{ err }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">{{ form.password2.label.text }}</label>
+      <div class="col-sm-3">
+        {{ form.password2 }}
+      </div>
+      <div class="col-sm-5">
+        <ul class="text-danger">
+        {% for err in form.password2.errors %}
+          <li>{{ err }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        {{ form.csrf_token }}
+        {{ form.submit }}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

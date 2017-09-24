@@ -17,7 +17,7 @@
                 <a href={{ url_for('profile',nickname=weibo_obj.user.nickname) }}><img src="{{ url_for('static', filename = weibo_obj.user.head_img) }}" alt="个人头像"></a>
             </div>
             <div class="weibo-right">
-                <h6>{{ weibo_obj.user.nickname }}</h6>
+                <h6><a href={{ url_for('user_detail',nickname=weibo_obj.user.nickname) }}>{{ weibo_obj.user.nickname }}</a></h6>
                 <small class="text-muted">{{ weibo_obj.created_at }} 来自360浏览器</small>
                 <div class="weibo-content">
                     {{ weibo_obj.get_content()|safe }}

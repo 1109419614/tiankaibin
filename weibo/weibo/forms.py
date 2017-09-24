@@ -36,8 +36,7 @@ from datetime import datetime
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField,FileRequired,FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField,FileField
-from wtforms.validators import DataRequired, ValidationError
-
+from wtforms.validators import DataRequired, ValidationError,EqualTo
 
 
 from weibo import db
@@ -56,6 +55,37 @@ class LoginForm(FlaskForm):
     submit = SubmitField('登录', render_kw={
             'class': 'btn btn-info'
         })
+
+class ChangepwdForm(FlaskForm):
+    """ 修改密码表单 """
+    oldpassword = PasswordField(label='旧密码', validators=[DataRequired("请输入旧密码")],
+                                description="请输入旧密码",
+                                render_kw={"required": "required", "class": "form-control"})
+    newpassword = PasswordField(label='新密码', validators=[DataRequired("请输入新密码"),EqualTo('password2', message='密码必须一致')],
+                                 description="请输入新密码",
+                                 render_kw={"required": "required", "class": "form-control"},
+                                 )
+    password2 = PasswordField(label='确认新密码', validators=[DataRequired("请再输入新密码")],description="请再输入新密码")
+    submit = SubmitField('确认修改', render_kw={
+            'class': 'btn btn-info'
+        })
+    def validate_oldpassword(self, field):
+        oldpassword = field.data
+        if len(oldpassword) != 6:
+            raise ValidationError("密码必须是6位")
+        return oldpassword
+
+    def validate_newpassword(self, field):
+        newpassword = field.data
+        if len(newpassword) != 6:
+            raise ValidationError("密码必须是6位")
+        return newpassword
+
+    def validate_password2(self, field):
+        password2 = field.data
+        if len(password2) != 6:
+            raise ValidationError("密码必须是6位")
+        return password2
 
 
 

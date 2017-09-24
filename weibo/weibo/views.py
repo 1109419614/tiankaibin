@@ -14,7 +14,7 @@ from flask_login import login_required, login_user, logout_user,\
     UserMixin, current_user
 from werkzeug.utils import secure_filename
 
-from weibo.forms import LoginForm, RegistForm, WeiboForm, WeiboCommentForm
+from weibo.forms import LoginForm, RegistForm, WeiboForm, WeiboCommentForm,ChangepwdForm
 from weibo import login_manager, db, app
 from weibo.models import User, Weibo, Topic, WeiboRelTopic, Comment, Role,Friend
 from weibo.decorators import staff_perms_required
@@ -115,6 +115,23 @@ def regist():
         # 跳转到首页
         return redirect(url_for('index'))
     return render_template('user/regist.html', form=form)
+
+@app.route('/user/changepwd/', methods=['GET', 'POST'])
+@login_required
+def changepwd():
+    """ 修改密码 """
+    form=ChangepwdForm()
+    if form.validate_on_submit():
+        if current_user.check_password(form.data['oldpassword']):
+            current_user.set_password(form.data['newpassword'])
+            db.session.add(current_user)
+            db.session.commit()
+            flash('你的密码成功修改啦')
+            return redirect(url_for('index'))
+        else:
+            flash('修改失败,请确认旧密码正确')
+
+    return render_template('user/changepwd.html',form=form)
 
 
 @app.route('/user/profile/<nickname>/')
