@@ -15,7 +15,7 @@
         <h3>{{ user.nickname }}</h3>
         <p>这是一个伟大的签名</p>
       </div>
-      <a href="javascript:;" class="btn btn-info btn-add-friend" data-id="{{ user.id }}">+关注</a>
+      <a href="javascript:;" class="btn btn-info btn-add-friend" data-url="{{ url_for('user_friend',nickname=user.nickname) }}">+关注</a>
   </div>
   <div class="user-tips">
     <ul class="list-unstyled list-inline clearfix">
@@ -83,13 +83,16 @@
   $(function(){
     $('.btn-add-friend').on('click', function(){
       var _self = $(this);
+
       $.post(_self.attr('data-url'), function(rest){
         if(rest == '201'){
           alert('关注成功');
-        }else if (rest=='404'){
+        }else if (rest=='402'){
           alert('您已经关注该用户了')
         }else if(rest == '401'){
           alert('请先登录')
+        }else if(rest == '404'){
+            alert('没有此用户')
         }
       })
     })

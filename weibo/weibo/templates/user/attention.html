@@ -1,0 +1,43 @@
+{% extends 'home/home_base.html' %}
+{% import 'moudule/paginator.html' as paginator %}
+{% block head_title %}
+<title>关注详情</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+{% block center_content %}
+<!-- 用户基本信息 -->
+
+<!-- 微博列表 -->
+<div class="list-weibo">
+    {% for friend_obj in page_data.items %}
+    <div class="item-weibo clearfix">
+<div class="panel-user">
+  <div class="user-content clearfix">
+      <div class="headimg">
+          <a href={{ url_for('profile',nickname=friend_obj.nickname) }}><img src="{{ url_for('static', filename=friend_obj.head_img) }}" alt="个人头像"></a>
+      </div>
+      <div class="user-info">
+        <h3>{{ friend_obj.nickname }}</h3>
+        <p>这是一个伟大的签名</p>
+      </div>
+  </div>
+  <div class="user-tips">
+    <ul class="list-unstyled list-inline clearfix">
+      <li>
+          <a href="#">
+              <strong>168</strong>
+              <span>微博</span>
+          </a>
+      </li>
+
+    </ul>
+  </div>
+</div>
+    </div>
+    {% endfor %}
+</div>
+<!-- // 微博列表 -->
+<!-- 分页 -->
+{{ paginator.pagination3(page_data, 'attention') }}
+<!-- // 分页 -->
+{% endblock %}

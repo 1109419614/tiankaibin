@@ -43,6 +43,7 @@ class User(UserMixin, db.Model):
 
     weibos = db.relationship('Weibo', backref='user', lazy='dynamic')
     comments = db.relationship('Comment', backref='user', lazy='dynamic')
+    
 
     def set_password(self, password):
         """  设置用户的hash密码 """

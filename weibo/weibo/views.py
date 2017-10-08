@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 import os
 from datetime import datetime
-from flask import render_template, redirect, flash, url_for, request, abort
+from flask import render_template, redirect, flash, url_for, request, abort,session
 from flask_login import login_required, login_user, logout_user,\
     UserMixin, current_user
 from werkzeug.utils import secure_filename
@@ -142,6 +142,19 @@ def profile(nickname):
     #print(current_user)
     return render_template('user/profile.html',user=user)
 
+@app.route('/user/attention')
+@app.route('/user/attention/page/<int:page>')
+@login_required
+def attention(page=None):
+    """ 关注好友 """
+    if page is None:
+        page = 1
+    #注意下行的"==",filter与filter_by差别
+
+    page_data =User.query.join(Friend,User.id == Friend.from_user_id).order_by(User.created_at.desc()) \
+        .paginate(page=page, per_page=10)
+
+    return render_template('user/attention.html',page_data=page_data)
 
 @app.route('/user/<nickname>/')
 @app.route('/user/<nickname>/page/<int:page>/')
