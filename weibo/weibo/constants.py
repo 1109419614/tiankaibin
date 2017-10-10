@@ -21,11 +21,6 @@ class PermsEnum(enum.Enum):
     ADMIN = '4'
 
 
-class FriendEnum(enum.Enum):
-    """ 好友状态 """
-    YES = "1"
-    NO = "2"
-    DEFAULT = "3"
 
 # 邮箱正则
 EMAIL_PATTERN = re.compile(

@@ -20,7 +20,7 @@ from flask_login import login_required, login_user, logout_user,\
     UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from weibo.constants import FriendEnum, PermsEnum, UserStatusEnum
+from weibo.constants import  PermsEnum, UserStatusEnum
 from weibo import constants
 from weibo import db
 
@@ -33,6 +33,7 @@ class User(UserMixin, db.Model):
     nickname = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     head_img = db.Column(db.String(200))
+    attention_number =db.Column(db.Integer,default=0,nullable=True)
 
     status = db.Column(db.Enum(UserStatusEnum))
     is_valid = db.Column(db.Boolean, default=True)
@@ -43,7 +44,8 @@ class User(UserMixin, db.Model):
 
     weibos = db.relationship('Weibo', backref='user', lazy='dynamic')
     comments = db.relationship('Comment', backref='user', lazy='dynamic')
-    
+
+
 
     def set_password(self, password):
         """  设置用户的hash密码 """
@@ -187,9 +189,13 @@ class Friend(db.Model):
     """ 好友/关注 """
     __tablename__ = 'friend'
     id = db.Column(db.Integer, primary_key=True)
-    from_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    to_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    status = db.Column(db.Enum(FriendEnum))
+
+    from_user_id = db.Column(db.Integer)
+    to_user_id = db.Column(db.Integer)
+
+
+
+    status = db.Column(db.Integer)    #1是存在，0不存在
     created_at = db.Column(db.DateTime)
 
     def __repr__(self):

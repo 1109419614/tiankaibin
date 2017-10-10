@@ -9,10 +9,11 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 import os
 from datetime import datetime
-from flask import render_template, redirect, flash, url_for, request, abort,session
+from flask import render_template, redirect, flash, url_for, request, abort
 from flask_login import login_required, login_user, logout_user,\
     UserMixin, current_user
 from werkzeug.utils import secure_filename
+
 
 from weibo.forms import LoginForm, RegistForm, WeiboForm, WeiboCommentForm,ChangepwdForm
 from weibo import login_manager, db, app
@@ -150,8 +151,16 @@ def attention(page=None):
     if page is None:
         page = 1
     #注意下行的"==",filter与filter_by差别
+    # print (Friend.query.filter_by(from_user_id = current_user.id)[0].to_user_id)
 
-    page_data =User.query.join(Friend,User.id == Friend.from_user_id).order_by(User.created_at.desc()) \
+    friendshiplist=Friend.query.filter_by(from_user_id = current_user.id).all()
+    friend_ids=[]
+    for i in range(len(friendshiplist)):
+        friend_ids.append(friendshiplist[i].to_user_id)
+    print (friend_ids)
+
+    # print (User.to_user)
+    page_data =User.query.filter(User.id.in_(friend_ids)).order_by(User.created_at.desc()) \
         .paginate(page=page, per_page=10)
 
     return render_template('user/attention.html',page_data=page_data)
@@ -236,8 +245,11 @@ def user_friend(nickname):
     rel_obj = Friend(
         from_user_id=current_user.id,
         to_user_id=to_user.id,
-        created_at=datetime.now()
+        created_at=datetime.now(),
+        status = 1
     )
+    current_user.attention_number+=1
+    db.session.add(current_user)
     db.session.add(rel_obj)
     db.session.commit()
     return '201'
