@@ -36,6 +36,7 @@
         <a class="btn btn-default" href="javascript:;" title="" data-url="{{ url_for('admin_manage_user', pk=user_obj.id, status=1) }}">取消限制</a>
       {% else %}
         <a class="btn btn-info" href="javascript:;" title="" data-url="{{ url_for('admin_manage_user', pk=user_obj.id, status=0) }}">限制登录</a>
+        <!--   data-url 属性要post，通过触发javascrpt脚本-->
       {% endif %}
         <a href="{{ url_for('admin_user_role', pk=user_obj.id) }}" title="">管理角色</a>
       </td>

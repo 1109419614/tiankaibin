@@ -69,7 +69,7 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
 
-    perms = db.Column(db.Enum(PermsEnum))
+    perms = db.Column(db.Enum(PermsEnum))   #拥有name属性来取值
 
     is_valid = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime)
@@ -103,9 +103,6 @@ class Weibo(db.Model):
     def get_content(self):
         """ 替换@和话题 """
         content = self.content
-
-
-
         # 替换@,match_obj为 "@sb"
         def replace_at(match_obj):
             return '<a href="%s">%s</a>' % (

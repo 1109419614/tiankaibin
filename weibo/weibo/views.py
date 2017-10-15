@@ -282,6 +282,7 @@ def admin_users(page=None):
 
 @app.route('/admin/user/manage/<int:pk>/<int:status>/', methods=['POST'])
 def admin_manage_user(pk, status):
+    """登录限制"""
     user = User.query.filter_by(id=pk, is_valid=1).first()
     if user is None:
         return '404'
@@ -306,21 +307,23 @@ def admin_user_role(pk):
     perms = constants.PermsEnum
     roles = Role.query.filter_by(user_id=user.id, is_valid=1)
     # 已经存在的角色
-    has_roles = list(map(lambda n: n.perms.name, roles))
+    has_roles = list(map(lambda x: x.perms.name, roles))
     if request.method == 'POST':
         # 删除所有的角色
         roles.delete()
         # for item in roles:
         #     item.is_valid = 0
         #     db.session.add(item)
-        for name in request.form.getlist('perms'):
-            enum_perm = getattr(constants.PermsEnum, name, None)
-            role_obj = Role(
-                user_id=user.id,
-                perms=enum_perm,
-                name=enum_perm.name,
+        data=request.form.getlist('perms')
+        for requestname in data:
+            perms_enum =getattr(constants.PermsEnum,requestname,None)
+            if perms_enum:
+                role_obj =Role(
+                    name=requestname,
+                    perms=perms_enum,
+                    user_id=user.id
                 )
-            db.session.add(role_obj)
+                db.session.add(role_obj)
         db.session.commit()
         flash('编辑成功')
         return redirect(url_for('admin_user_role', pk=pk))

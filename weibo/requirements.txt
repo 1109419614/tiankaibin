@@ -1,94 +1,30 @@
-adium-theme-ubuntu==0.3.4
-alembic==0.9.3
-aniso8601==1.2.1
-attrs==16.0.0
-beautifulsoup4==4.5.1
-blinker==1.3
-certifi==2017.7.27.1
-chardet==3.0.4
-click==6.7
-compizconfig-python==0.9.13.0
-cryptography==1.5
-cssselect==1.0.1
-dirspec==13.10
-dominate==2.3.1
-enum34==1.1.6
-Flask==0.12.2
-Flask-Bootstrap==3.3.7.1
-Flask-Login==0.4.0
-Flask-Mail==0.9.1
-Flask-Migrate==2.0.4
-Flask-RESTful==0.3.6
-Flask-Script==2.0.5
-Flask-SQLAlchemy==2.2
-Flask-WTF==0.14.2
-html5lib==0.999
-httplib2==0.9.1
-idna==2.5
-iniparse==0.4
-ipaddress==1.0.16
-itsdangerous==0.24
-Jinja2==2.9.6
-keyring==9.1
-keyrings.alt==1.1.1
-launchpadlib==1.10.4
-lazr.restfulclient==0.13.4
-lazr.uri==1.0.3
-lxml==3.6.4
-Mako==1.0.7
-MarkupSafe==1.0
-mysql-connector-python==2.1.3
-MySQL-python==1.2.5
-mysql-utilities==1.6.3
-oauth==1.0.1
-oauthlib==1.1.2
-PAM==0.4.2
-paramiko==2.0.0
-parsel==1.2.0
-pexpect==4.2.0
-Pillow==3.3.1
-piston-mini-client==0.7.5
-psutil==4.2.0
-ptyprocess==0.5.1
-pyasn1==0.1.9
-pyasn1-modules==0.0.7
-pycrypto==2.6.1
-pycurl==7.43.0
-PyDispatcher==2.0.5
-pygobject==3.22.0
-PyJWT==1.4.1
-pyliblzma==0.5.3
-pyodbc==3.0.10
-pyOpenSSL==16.1.0
-pyserial==3.1.1
-pysqlite==2.7.0
-python-apt==1.1.0b5
-python-dateutil==2.6.1
-python-editor==1.0.3
-pytz==2017.2
-pyxdg==0.25
-queuelib==1.4.2
-requests==2.18.3
-rpm-python==4.12.0.1
-Scrapy==1.4.0
-SecretStorage==2.3.1
-service-identity==16.0.0
-simplejson==3.8.2
-six==1.10.0
-SQLAlchemy==1.1.11
-Twisted==16.4.1
-ubuntu-kylin-software-center==1.3.10
-unity-china-photo-scope==1.0
-unity-lens-photos==1.0
-urlgrabber==3.9.1
-urllib3==1.22
-uWSGI==2.0.15
-virtualenv==15.1.0
-visitor==0.1.3
-w3lib==1.18.0
-wadllib==1.3.2
-Werkzeug==0.12.2
-WTForms==2.1
-youtube-dl==2016.6.25
-yum-metadata-parser==1.1.4
-zope.interface==4.2.0
+alembic (0.9.5)
+aniso8601 (1.3.0)
+blinker (1.4)
+click (6.7)
+dominate (2.3.1)
+Flask (0.12.2)
+Flask-Bootstrap (3.3.7.1)
+Flask-Login (0.4.0)
+Flask-Mail (0.9.1)
+Flask-Migrate (2.1.1)
+Flask-RESTful (0.3.6)
+Flask-Script (2.0.6)
+Flask-SQLAlchemy (2.2)
+Flask-WTF (0.14.2)
+itsdangerous (0.24)
+Jinja2 (2.9.6)
+Mako (1.0.7)
+MarkupSafe (1.0)
+MySQL-python (1.2.5)
+pip (9.0.1)
+python-dateutil (2.6.1)
+python-editor (1.0.3)
+pytz (2017.2)
+setuptools (36.4.0)
+six (1.10.0)
+SQLAlchemy (1.1.14)
+visitor (0.1.3)
+Werkzeug (0.12.2)
+wheel (0.29.0)
+WTForms (2.1)
